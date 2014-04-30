@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+    "name": "Screen Ruler",
+    "short_name": "Ruler",
+    "description": "A Screen Ruler with magnifier",
+    "version": "0.1",
+    "author": "Stefan Dietz <dev@stefan-dietz.eu>",
+
+    "browser_action": {
+       "default_title": "Screen Ruler"
+    },
+
+    "permissions": [
+        "tabs",
+        "<all_urls>"
+    ],
+
+    "background": {
+        "scripts": ["src/background.js"]
+    }
+}
