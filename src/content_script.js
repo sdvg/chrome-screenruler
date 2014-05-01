@@ -38,7 +38,7 @@ img.onload = function () {
           for(var y = 0; y < 20; y++) {
               var pixel = ctx_image.getImageData(evt.x + x - 10, evt.y - 10 + y, 1, 1).data;
 
-              ctx_ruler.fillStyle = 'rgba(' + pixel[0] + ', ' + pixel[2] + ', ' + pixel[2] + ')';
+              ctx_ruler.fillStyle = 'rgb(' + pixel[0] + ', ' + pixel[2] + ', ' + pixel[2] + ')';
               ctx_ruler.fillRect(evt.x + 20 + x * 10, evt.y + 20 + y * 10, 10, 10);
           }
       }
