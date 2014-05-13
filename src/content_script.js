@@ -74,6 +74,7 @@ function addCanvas () {
     canvas.style.zIndex = '999999999';
     canvas.style.top = '0';
     canvas.style.left = '0';
+    canvas.style.cursor = 'none';
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     document.body.appendChild(canvas);
