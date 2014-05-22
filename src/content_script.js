@@ -2,6 +2,8 @@ var MAGNIFIER_ZOOM = 16;
 var MAGNIFIER_RADIUS = 100;
 var MAGNIFIER_OFFSET = 20;
 
+var measureStartPosition = null;
+
 function init () {
     ctx_image.drawImage(img, 0, 0);
 
@@ -14,11 +16,30 @@ function init () {
         drawCrosshairs(position);
     });
 
+    canvas_ruler.addEventListener('mousedown', function (evt) {
+        measureStartPosition = {x: evt.x - 1, y: evt.y - 1};
+
+        canvas_ruler.addEventListener('mousemove', measureMove);
+        canvas_ruler.addEventListener('mouseup', measureEnd);
+    });
+
     document.addEventListener('keydown', function (evt) {
         if(evt.keyCode == 27) {
             exit();
         }
     });
+}
+
+function measureMove (evt) {
+    drawLine(measureStartPosition.x, measureStartPosition.y, evt.x, evt.y);
+}
+
+function measureEnd (evt) {
+    canvas_ruler.removeEventListener('mousemove', measureMove);
+    canvas_ruler.removeEventListener('mouseup', measureEnd);
+
+    prompt('Size:', evt.x + ' x ' + evt.y);
+    exit();
 }
 
 function drawMagnifier (position) {
