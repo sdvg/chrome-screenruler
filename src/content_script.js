@@ -38,7 +38,7 @@ function measureEnd (evt) {
     canvas_ruler.removeEventListener('mousemove', measureMove);
     canvas_ruler.removeEventListener('mouseup', measureEnd);
 
-    prompt('Size:', evt.x + ' x ' + evt.y);
+    prompt('Size:', (evt.x - measureStartPosition.x) + ' x ' + (evt.y - measureStartPosition.y));
     exit();
 }
 
