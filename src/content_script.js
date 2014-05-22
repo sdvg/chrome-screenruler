@@ -4,6 +4,33 @@ var MAGNIFIER_OFFSET = 20;
 
 var measureStartPosition = null;
 
+var canvasStyles = [
+    'position: fixed',
+    'width: 100%',
+    'min-width: 100%',
+    'max-width: 100%',
+    'height: 100%',
+    'min-height: 100%',
+    'max-height: 100%',
+    'z-index: 999999999',
+    'top: 0',
+    'right: 0',
+    'bottom: 0',
+    'left: 0',
+    'cursor: none',
+    'display: block',
+    'visibility: visible',
+    'margin: 0',
+    '-webkit-transform: none',
+    'transform: none',
+    'opacity: 100',
+    'border: 0',
+    'clip: auto',
+    'overflow: hidden',
+    'zoom: 0',
+    'border-radius: 0'
+];
+
 function init () {
     ctx_image.drawImage(img, 0, 0);
 
@@ -91,11 +118,7 @@ function drawLine (fromX, fromY, toX, toY) {
 
 function addCanvas () {
     var canvas = document.createElement('canvas');
-    canvas.style.position = 'fixed';
-    canvas.style.zIndex = '999999999';
-    canvas.style.top = '0';
-    canvas.style.left = '0';
-    canvas.style.cursor = 'none';
+    canvas.setAttribute('style', canvasStyles.join(' !important; '));
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     document.body.appendChild(canvas);
