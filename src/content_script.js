@@ -93,7 +93,11 @@ function drawMagnifier (position) {
     }
 
     //draw scope:
-    ctx_ruler.strokeStyle = '#000';
+    var selectedPixel = ctx_image.getImageData(position.x - 1, position.y - 1, 1, 1).data;
+    var brightness = (selectedPixel[0] + selectedPixel[1] + selectedPixel[3]) / 3;
+
+    ctx_ruler.strokeStyle = brightness < 150 ? '#fff' : '#000';
+
     ctx_ruler.lineWidth = 2;
     ctx_ruler.strokeRect(position.x + MAGNIFIER_RADIUS + MAGNIFIER_OFFSET - 5 - MAGNIFIER_ZOOM / 2,
                          position.y + MAGNIFIER_RADIUS + MAGNIFIER_OFFSET - 5 - MAGNIFIER_ZOOM / 2,
