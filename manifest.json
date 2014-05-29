@@ -10,6 +10,16 @@
        "default_title": "Screen Ruler"
     },
 
+    "commands": {
+        "open-screenruler": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+X",
+                "mac": "MacCtrl+Shift+X"
+            },
+            "description": "Open Screen Ruler"
+        }
+    },
+
     "permissions": [
         "tabs",
         "<all_urls>"
