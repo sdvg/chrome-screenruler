@@ -70,10 +70,16 @@ function measureEnd (evt) {
 }
 
 function drawMagnifier (position) {
+    var verticalDir = position.y > canvas_ruler.height - MAGNIFIER_RADIUS * 2 - MAGNIFIER_OFFSET * 2 ? 'top' : 'bottom';
+    var horizontalDir = position.x > canvas_ruler.width - MAGNIFIER_RADIUS * 2 - MAGNIFIER_OFFSET * 2 ? 'left' : 'right';
+
+    var xOffset = horizontalDir === 'right' ? MAGNIFIER_OFFSET : -MAGNIFIER_RADIUS * 2 - MAGNIFIER_OFFSET;
+    var yOffset = verticalDir === 'bottom' ? MAGNIFIER_OFFSET : -MAGNIFIER_RADIUS * 2 - MAGNIFIER_OFFSET;
+
     ctx_ruler.save();
     ctx_ruler.beginPath();
-    ctx_ruler.arc(position.x + MAGNIFIER_RADIUS + MAGNIFIER_OFFSET,
-                  position.y + MAGNIFIER_RADIUS + MAGNIFIER_OFFSET,
+    ctx_ruler.arc(position.x + MAGNIFIER_RADIUS + xOffset,
+                  position.y + MAGNIFIER_RADIUS + yOffset,
                   MAGNIFIER_RADIUS, 0, Math.PI * 2, true);
     ctx_ruler.lineWidth = 8;
     ctx_ruler.stroke();
@@ -86,8 +92,8 @@ function drawMagnifier (position) {
                                                position.y - MAGNIFIER_RADIUS / MAGNIFIER_ZOOM + y, 1, 1).data;
 
             ctx_ruler.fillStyle = 'rgb(' + pixel[0] + ', ' + pixel[1] + ', ' + pixel[2] + ')';
-            ctx_ruler.fillRect(position.x + MAGNIFIER_OFFSET + x * MAGNIFIER_ZOOM - MAGNIFIER_ZOOM / 2,
-                               position.y + MAGNIFIER_OFFSET + y * MAGNIFIER_ZOOM - MAGNIFIER_ZOOM / 2,
+            ctx_ruler.fillRect(position.x + xOffset + x * MAGNIFIER_ZOOM - MAGNIFIER_ZOOM / 2,
+                               position.y + yOffset + y * MAGNIFIER_ZOOM - MAGNIFIER_ZOOM / 2,
                                MAGNIFIER_ZOOM, MAGNIFIER_ZOOM);
         }
     }
@@ -99,8 +105,8 @@ function drawMagnifier (position) {
     ctx_ruler.strokeStyle = brightness < 150 ? '#fff' : '#000';
 
     ctx_ruler.lineWidth = 2;
-    ctx_ruler.strokeRect(position.x + MAGNIFIER_RADIUS + MAGNIFIER_OFFSET - 5 - MAGNIFIER_ZOOM / 2,
-                         position.y + MAGNIFIER_RADIUS + MAGNIFIER_OFFSET - 5 - MAGNIFIER_ZOOM / 2,
+    ctx_ruler.strokeRect(position.x + MAGNIFIER_RADIUS + xOffset - 5 - MAGNIFIER_ZOOM / 2,
+                         position.y + MAGNIFIER_RADIUS + yOffset - 5 - MAGNIFIER_ZOOM / 2,
                          MAGNIFIER_ZOOM + ctx_ruler.lineWidth,
                          MAGNIFIER_ZOOM + ctx_ruler.lineWidth);
 
