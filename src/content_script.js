@@ -86,17 +86,39 @@ function drawMagnifier (position) {
     ctx_ruler.closePath();
     ctx_ruler.clip();
 
-    for(var x = 0; x < MAGNIFIER_RADIUS * 2 / MAGNIFIER_ZOOM; x++) {
-        for(var y = 0; y < MAGNIFIER_RADIUS * 2 / MAGNIFIER_ZOOM; y++) {
-            var pixel = ctx_image.getImageData(position.x + x - MAGNIFIER_RADIUS / MAGNIFIER_ZOOM,
-                                               position.y - MAGNIFIER_RADIUS / MAGNIFIER_ZOOM + y, 1, 1).data;
+    ctx_ruler.webkitImageSmoothingEnabled = false;
+    ctx_ruler.imageSmoothingEnabled = false;
 
-            ctx_ruler.fillStyle = 'rgb(' + pixel[0] + ', ' + pixel[1] + ', ' + pixel[2] + ')';
-            ctx_ruler.fillRect(position.x + xOffset + x * MAGNIFIER_ZOOM - MAGNIFIER_ZOOM / 2,
-                               position.y + yOffset + y * MAGNIFIER_ZOOM - MAGNIFIER_ZOOM / 2,
-                               MAGNIFIER_ZOOM, MAGNIFIER_ZOOM);
-        }
-    }
+    var sx = position.x - MAGNIFIER_RADIUS / MAGNIFIER_ZOOM;
+    var sy = position.y - MAGNIFIER_RADIUS / MAGNIFIER_ZOOM;
+    var sw = MAGNIFIER_RADIUS * 2 / MAGNIFIER_ZOOM;
+    var sh = MAGNIFIER_RADIUS * 2 / MAGNIFIER_ZOOM;
+    var dx = position.x + xOffset;// * MAGNIFIER_ZOOM - MAGNIFIER_ZOOM / 2;
+    var dy = position.y + yOffset;// * MAGNIFIER_ZOOM - MAGNIFIER_ZOOM / 2;
+    var dw = MAGNIFIER_RADIUS * 2;
+    var dh = MAGNIFIER_RADIUS * 2;
+
+    console.log('sx:', sx);
+    console.log('sy:', sy);
+    console.log('sw:', sw);
+    console.log('sh:', sh);
+    console.log('dx:', dx);
+    console.log('dy:', dy);
+    console.log('dw:', dw);
+    console.log('dh:', dh);
+    console.log('-----------');
+
+    ctx_ruler.drawImage(
+        img,
+        sx, // in float sx
+        sy, // in float sy
+        sw, // in float sw,
+        sh, // in float sh,
+        dx, // in float dx,
+        dy, // in float dy,
+        dw, // in float dw,
+        dh // in float dh
+    );
 
     //draw scope:
     var selectedPixel = ctx_image.getImageData(position.x - 1, position.y - 1, 1, 1).data;
